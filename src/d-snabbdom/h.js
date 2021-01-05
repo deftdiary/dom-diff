@@ -1,6 +1,6 @@
 import vnode from './vnode'
 
-export default function (sel, data, c) {
+export default function h(sel, data, c) {
   if (arguments.length !== 3) {
     throw new Error('require 3 paramters')
   }
