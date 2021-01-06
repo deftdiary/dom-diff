@@ -26,17 +26,16 @@ export default function updateChildren(parentElm, oldCh, newCh) {
 
   // 开始 while loop
   while (oldStartIdx <= oldEndIdx && newStartIdx <= newEndIdx) {
-    if (oldStartVnode == null || oldCh[oldStartIdx] === undefined) {
+    if (oldStartVnode == null || oldCh[oldStartIdx] == undefined) {
       oldStartVnode = oldCh[++oldStartIdx]
-    } else if (oldEndVnode == null || oldCh[oldEndIdx] === undefined) {
+    } else if (oldEndVnode == null || oldCh[oldEndIdx] == undefined) {
       oldEndVnode = oldCh[--oldEndIdx]
-    } else if (newStartVnode == null || newCh[newStartIdx] === undefined) {
+    } else if (newStartVnode == null || newCh[newStartIdx] == undefined) {
       newStartVnode = newCh[++newStartIdx]
-    } else if (newEndVnode == null || newCh[newEndIdx] === undefined) {
+    } else if (newEndVnode == null || newCh[newEndIdx] == undefined) {
       newEndVnode = newCh[--newEndIdx]
-    }
-    // * 新前与旧前
-    if (sameVnode(oldStartVnode, newStartVnode)) {
+    } else if (sameVnode(oldStartVnode, newStartVnode)) {
+    // * 新前 与 旧前
       console.log('新前与旧前') // df-log
       patchVnode(oldStartVnode, newStartVnode)
       oldStartVnode = oldCh[++oldStartIdx]
@@ -66,13 +65,13 @@ export default function updateChildren(parentElm, oldCh, newCh) {
         keyMap = {}
         for (let i = oldStartIdx; i <= oldEndIdx; i++) {
           const key = oldCh[i].key
-          if (key !== undefined) {
+          if (key != undefined) {
             keyMap[key] = i
           }
         }
       }
       const idxInOld = keyMap[newStartVnode.key]
-      if (idxInOld === undefined) {
+      if (idxInOld == undefined) {
         parentElm.insertBefore(createElement(newStartVnode), oldStartVnode.elm)
       } else {
         const elmToMove = oldCh[idxInOld]
@@ -83,10 +82,10 @@ export default function updateChildren(parentElm, oldCh, newCh) {
       newStartVnode = newCh[++newStartIdx]
     }
   }
-  console.log(oldStartIdx, oldEndIdx) // df-log
   if (newStartIdx <= newEndIdx) {
     for (let i = newStartIdx; i <= newEndIdx; i++) {
-      parentElm.insertBefore(createElement(newCh[i]), oldCh[oldStartIdx])
+      console.log(oldStartIdx) // df-log
+      parentElm.insertBefore(createElement(newCh[i]), oldCh[oldStartIdx] ? oldCh[oldStartIdx].elm : null)
     }
   } else if(oldStartIdx <= oldEndIdx) {
     for (let i = oldStartIdx; i <= oldEndIdx; i++) {
