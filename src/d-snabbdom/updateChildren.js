@@ -84,7 +84,6 @@ export default function updateChildren(parentElm, oldCh, newCh) {
   }
   if (newStartIdx <= newEndIdx) {
     for (let i = newStartIdx; i <= newEndIdx; i++) {
-      console.log(oldStartIdx) // df-log
       parentElm.insertBefore(createElement(newCh[i]), oldCh[oldStartIdx] ? oldCh[oldStartIdx].elm : null)
     }
   } else if(oldStartIdx <= oldEndIdx) {
